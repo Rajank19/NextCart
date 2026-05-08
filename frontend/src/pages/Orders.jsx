@@ -7,7 +7,7 @@ function Orders() {
   useEffect(() => {
 
     const savedOrders =
-      JSON.parse(localStorage.getItem("orders")) || [];
+      JSON.parse(localStorage.getItem("orders") || "[]")
 
     setOrders(savedOrders);
 

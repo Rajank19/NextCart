@@ -132,8 +132,8 @@ function Checkout() {
           // GET OLD ORDERS
           const oldOrders =
             JSON.parse(
-              localStorage.getItem("orders")
-            ) || [];
+  localStorage.getItem("orders") || "[]"
+);
 
           // SAVE ORDER
           localStorage.setItem(

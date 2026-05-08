@@ -6,7 +6,7 @@ function Cart() {
   const navigate = useNavigate();
 
   const cart =
-    JSON.parse(localStorage.getItem("cart")) || [];
+    JSON.parse(localStorage.getItem("cart") || "[]")
 
   const total = cart.reduce(
     (acc, item) =>

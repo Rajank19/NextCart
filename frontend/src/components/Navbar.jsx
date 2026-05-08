@@ -2,48 +2,105 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+
   const navigate = useNavigate();
 
+  // SAFE TOKEN GET
   const token = localStorage.getItem("token");
 
   let email = "";
 
+  // SAFE JWT DECODE
   if (token) {
+
     try {
-      const payload = JSON.parse(atob(token.split(".")[1]));
-      email = payload.sub;
-    } catch {}
+
+      const tokenParts = token.split(".");
+
+      if (tokenParts.length === 3) {
+
+        const payload = JSON.parse(
+          atob(tokenParts[1])
+        );
+
+        email = payload.sub || "";
+
+      }
+
+    } catch (error) {
+
+      console.log("Invalid Token");
+
+      localStorage.removeItem("token");
+
+    }
   }
 
+  // LOGOUT
   const logoutUser = () => {
+
     localStorage.removeItem("token");
+
     navigate("/login");
+
   };
 
   return (
+
     <nav style={nav}>
-      <h2 style={{ cursor: "pointer" }} onClick={() => navigate("/")}>
+
+      <h2
+        style={{ cursor: "pointer" }}
+        onClick={() => navigate("/")}
+      >
         NextCart
       </h2>
 
       <div style={menu}>
-        <Link style={link} to="/">Home</Link>
-        <Link style={link} to="/products">Products</Link>
-        <Link style={link} to="/cart">Cart</Link>
-        <Link style={link} to="/orders">Orders</Link>
+
+        <Link style={link} to="/">
+          Home
+        </Link>
+
+        <Link style={link} to="/products">
+          Products
+        </Link>
+
+        <Link style={link} to="/cart">
+          Cart
+        </Link>
+
+        <Link style={link} to="/orders">
+          Orders
+        </Link>
 
         {token ? (
+
           <>
-            <span style={user}>{email}</span>
-            <button style={btn} onClick={logoutUser}>
+            <span style={user}>
+              {email}
+            </span>
+
+            <button
+              style={btn}
+              onClick={logoutUser}
+            >
               Logout
             </button>
           </>
+
         ) : (
-          <Link style={link} to="/login">Login</Link>
+
+          <Link style={link} to="/login">
+            Login
+          </Link>
+
         )}
+
       </div>
+
     </nav>
+
   );
 }
 
