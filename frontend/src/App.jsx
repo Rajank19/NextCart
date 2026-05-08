@@ -193,23 +193,52 @@
 
 // export default Cart;
 
+// import React from "react";
+
+// function App() {
+
+//   return (
+
+//     <div
+//       style={{
+//         background: "black",
+//         color: "white",
+//         minHeight: "100vh",
+//         padding: "40px",
+//       }}
+//     >
+
+//       <h1>
+//         NextCart Working 🚀
+//       </h1>
+
+//     </div>
+
+//   );
+// }
+
+// export default App;
+
 import React from "react";
+import Navbar from "./components/Navbar";
 
 function App() {
 
   return (
 
-    <div
-      style={{
-        background: "black",
-        color: "white",
-        minHeight: "100vh",
-        padding: "40px",
-      }}
-    >
+    <div>
 
-      <h1>
-        NextCart Working 🚀
+      <Navbar />
+
+      <h1
+        style={{
+          color: "white",
+          background: "black",
+          minHeight: "100vh",
+          padding: "40px",
+        }}
+      >
+        Navbar Working 🚀
       </h1>
 
     </div>
