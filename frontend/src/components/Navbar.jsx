@@ -5,8 +5,9 @@ function Navbar() {
 
   const navigate = useNavigate();
 
-  // SAFE TOKEN GET
-  const token = localStorage.getItem("token");
+  // SAFE TOKEN
+  const token =
+    localStorage.getItem("token") || "";
 
   let email = "";
 
@@ -15,7 +16,8 @@ function Navbar() {
 
     try {
 
-      const tokenParts = token.split(".");
+      const tokenParts =
+        token.split(".");
 
       if (tokenParts.length === 3) {
 
@@ -23,26 +25,30 @@ function Navbar() {
           atob(tokenParts[1])
         );
 
-        email = payload.sub || "";
-
+        email =
+          payload?.sub || "";
       }
 
     } catch (error) {
 
-      console.log("Invalid Token");
+      console.log(
+        "Invalid Token"
+      );
 
-      localStorage.removeItem("token");
-
+      localStorage.removeItem(
+        "token"
+      );
     }
   }
 
   // LOGOUT
   const logoutUser = () => {
 
-    localStorage.removeItem("token");
+    localStorage.removeItem(
+      "token"
+    );
 
     navigate("/login");
-
   };
 
   return (
@@ -50,7 +56,9 @@ function Navbar() {
     <nav style={nav}>
 
       <h2
-        style={{ cursor: "pointer" }}
+        style={{
+          cursor: "pointer",
+        }}
         onClick={() => navigate("/")}
       >
         NextCart
@@ -58,19 +66,31 @@ function Navbar() {
 
       <div style={menu}>
 
-        <Link style={link} to="/">
+        <Link
+          style={link}
+          to="/"
+        >
           Home
         </Link>
 
-        <Link style={link} to="/products">
+        <Link
+          style={link}
+          to="/products"
+        >
           Products
         </Link>
 
-        <Link style={link} to="/cart">
+        <Link
+          style={link}
+          to="/cart"
+        >
           Cart
         </Link>
 
-        <Link style={link} to="/orders">
+        <Link
+          style={link}
+          to="/orders"
+        >
           Orders
         </Link>
 
@@ -91,7 +111,10 @@ function Navbar() {
 
         ) : (
 
-          <Link style={link} to="/login">
+          <Link
+            style={link}
+            to="/login"
+          >
             Login
           </Link>
 
