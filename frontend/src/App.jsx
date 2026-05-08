@@ -1,118 +1,194 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+function Cart() {
 
-import Home from "./pages/Home";
-import Products from "./pages/Products";
-import ProductDetails from "./pages/ProductDetails";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import Orders from "./pages/Orders";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Profile from "./pages/Profile";
+  const navigate = useNavigate();
 
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminProducts from "./pages/AdminProducts";
-import AdminOrders from "./pages/AdminOrders";
+  const cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
 
-import ProtectedRoute from "./components/ProtectedRoute";
+  const total = cart.reduce(
+    (acc, item) =>
+      acc + item.price * item.quantity,
+    0
+  );
 
-function App() {
+  const removeItem = (id) => {
+
+    const updatedCart = cart.filter(
+      (item) => item.id !== id
+    );
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(updatedCart)
+    );
+
+    window.location.reload();
+  };
+
+  const proceedCheckout = () => {
+
+    localStorage.setItem(
+      "cartTotal",
+      total
+    );
+
+    // IMPORTANT FIX ✅
+    navigate("/checkout");
+  };
 
   return (
-    <BrowserRouter>
+    <div
+      style={{
+        background: "#050505",
+        minHeight: "100vh",
+        padding: "40px",
+        color: "white",
+      }}
+    >
 
-      <Navbar />
+      <h1
+        style={{
+          textAlign: "center",
+          fontSize: "60px",
+          marginBottom: "20px",
+        }}
+      >
+        My Cart 🛒
+      </h1>
 
-      <Routes>
+      <h2
+        style={{
+          textAlign: "center",
+          color: "#22c55e",
+          marginBottom: "40px",
+        }}
+      >
+        Total: ₹ {total}
+      </h2>
 
-        {/* USER ROUTES */}
+      <div
+        style={{
+          textAlign: "center",
+          marginBottom: "40px",
+        }}
+      >
 
-        <Route
-          path="/"
-          element={<Home />}
-        />
+        <button
+          onClick={proceedCheckout}
+          style={{
+            padding: "15px 35px",
+            background: "#a855f7",
+            color: "white",
+            border: "none",
+            borderRadius: "12px",
+            cursor: "pointer",
+            fontSize: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          Proceed To Checkout 🚀
+        </button>
 
-        <Route
-          path="/products"
-          element={<Products />}
-        />
+      </div>
 
-        {/* PRODUCT DETAILS */}
-        <Route
-          path="/product/:id"
-          element={<ProductDetails />}
-        />
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns:
+            "repeat(auto-fill,minmax(300px,1fr))",
+          gap: "30px",
+        }}
+      >
 
-        <Route
-          path="/cart"
-          element={<Cart />}
-        />
+        {cart.length === 0 ? (
 
-        <Route
-          path="/checkout"
-          element={<Checkout />}
-        />
+          <h2
+            style={{
+              textAlign: "center",
+              width: "100%",
+            }}
+          >
+            Cart is Empty 🥲
+          </h2>
 
-        <Route
-          path="/orders"
-          element={<Orders />}
-        />
+        ) : (
 
-        <Route
-          path="/profile"
-          element={<Profile />}
-        />
+          cart.map((item) => (
 
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+            <div
+              key={item.id}
+              style={{
+                background: "#111",
+                padding: "20px",
+                borderRadius: "14px",
+                boxShadow:
+                  "0 8px 20px rgba(0,0,0,0.4)",
+              }}
+            >
 
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+              <img
+                src={item.image_url}
+                alt={item.title}
+                style={{
+                  width: "100%",
+                  height: "250px",
+                  objectFit: "cover",
+                  borderRadius: "10px",
+                }}
+              />
 
+              <h2
+                style={{
+                  marginTop: "15px",
+                }}
+              >
+                {item.title}
+              </h2>
 
-        {/* ADMIN ROUTES */}
+              <h3
+                style={{
+                  color: "#22c55e",
+                }}
+              >
+                ₹ {item.price}
+              </h3>
 
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
+              <p>
+                Quantity: {item.quantity}
+              </p>
 
-        <Route
-          path="/admin/products"
-          element={
-            <ProtectedRoute>
-              <AdminProducts />
-            </ProtectedRoute>
-          }
-        />
+              <button
+                onClick={() =>
+                  removeItem(item.id)
+                }
+                style={{
+                  width: "100%",
+                  padding: "12px",
+                  marginTop: "15px",
+                  background: "red",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                }}
+              >
+                Remove ❌
+              </button>
 
-        <Route
-          path="/admin/orders"
-          element={
-            <ProtectedRoute>
-              <AdminOrders />
-            </ProtectedRoute>
-          }
-        />
+            </div>
 
-      </Routes>
+          ))
 
-      <Footer />
+        )}
 
-    </BrowserRouter>
+      </div>
+
+    </div>
   );
 }
 
-export default App;
+export default Cart;
