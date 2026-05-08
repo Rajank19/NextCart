@@ -277,28 +277,22 @@ import {
   Route,
 } from "react-router-dom";
 
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+
 function App() {
 
   return (
 
     <BrowserRouter>
 
+      <Navbar />
+
       <Routes>
 
         <Route
           path="/"
-          element={
-            <h1
-              style={{
-                color: "white",
-                background: "black",
-                minHeight: "100vh",
-                padding: "40px",
-              }}
-            >
-              ROUTER WORKING 🚀
-            </h1>
-          }
+          element={<Home />}
         />
 
       </Routes>
