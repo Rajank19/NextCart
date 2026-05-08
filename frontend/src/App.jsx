@@ -248,19 +248,45 @@
 
 // export default App;
 
+// import React from "react";
+// import Navbar from "./components/Navbar";
+// import Home from "./pages/Home";
+
+// function App() {
+
+//   return (
+
+//     <div>
+
+//       <Navbar />
+
+//       <Home />
+
+//     </div>
+
+//   );
+// }
+
+// export default App;
+
 import React from "react";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
 
 function App() {
 
   return (
 
-    <div>
+    <div
+      style={{
+        background: "black",
+        color: "white",
+        minHeight: "100vh",
+        padding: "40px",
+      }}
+    >
 
-      <Navbar />
-
-      <Home />
+      <h1>
+        APP JSX WORKING 🚀
+      </h1>
 
     </div>
 
