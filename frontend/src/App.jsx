@@ -271,24 +271,39 @@
 
 import React from "react";
 
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+
 function App() {
 
   return (
 
-    <div
-      style={{
-        background: "black",
-        color: "white",
-        minHeight: "100vh",
-        padding: "40px",
-      }}
-    >
+    <BrowserRouter>
 
-      <h1>
-        APP JSX WORKING 🚀
-      </h1>
+      <Routes>
 
-    </div>
+        <Route
+          path="/"
+          element={
+            <h1
+              style={{
+                color: "white",
+                background: "black",
+                minHeight: "100vh",
+                padding: "40px",
+              }}
+            >
+              ROUTER WORKING 🚀
+            </h1>
+          }
+        />
+
+      </Routes>
+
+    </BrowserRouter>
 
   );
 }
