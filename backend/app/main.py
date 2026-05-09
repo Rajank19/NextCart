@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from app.routes import payments
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine, Base
@@ -24,7 +23,9 @@ app = FastAPI(
 # CORS FIX
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,14 +39,15 @@ app.include_router(products_router)
 app.include_router(cart_router)
 app.include_router(orders_router)
 app.include_router(payments_router)
-app.include_router(payments.router)
-
 
 @app.get("/")
 def home():
-    return {"message": "Welcome to NextCart API"}
-
+    return {
+        "message": "Welcome to NextCart API"
+    }
 
 @app.get("/health")
 def health():
-    return {"status": "running"}
+    return {
+        "status": "running"
+    }

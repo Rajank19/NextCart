@@ -34,9 +34,9 @@ def create_payment_order(
             "message": "Amount is required"
         }
 
-    # RAZORPAY ORDER DATA
+    # FIXED TEST PAYMENT AMOUNT
     order_data = {
-        "amount": int(amount) * 100,
+        "amount": 500 * 100,
         "currency": "INR",
         "payment_capture": 1
     }
