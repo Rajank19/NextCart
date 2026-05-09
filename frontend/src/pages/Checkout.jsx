@@ -369,7 +369,7 @@ function Checkout() {
 
       // CREATE ORDER
       const res = await axios.post(
-        "http://localhost:8000/payments/create-order",
+        "https://nextcart-wxgk.onrender.com/payments/create-order",
         {
           amount: 500,
         }

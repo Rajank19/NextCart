@@ -22,7 +22,7 @@ function AdminProducts() {
     try {
 
       const res = await axios.get(
-        "http://127.0.0.1:8000/products/"
+        "https://nextcart-wxgk.onrender.com/products/"
       );
 
       setProducts(res.data);
@@ -64,7 +64,7 @@ function AdminProducts() {
       };
 
       await axios.post(
-        "http://127.0.0.1:8000/products/",
+        "https://nextcart-wxgk.onrender.com/products/",
         payload
       );
 
@@ -89,7 +89,7 @@ function AdminProducts() {
     try {
 
       await axios.delete(
-        `http://127.0.0.1:8000/products/${id}`
+        `https://nextcart-wxgk.onrender.com/products/${id}`
       );
 
       alert("Product Deleted ✅");
@@ -142,7 +142,7 @@ function AdminProducts() {
       };
 
       await axios.put(
-        `http://127.0.0.1:8000/products/${editingId}`,
+        `https://nextcart-wxgk.onrender.com/products/${editingId}`,
         payload
       );
 

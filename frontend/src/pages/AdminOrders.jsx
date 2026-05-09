@@ -6,7 +6,7 @@ function AdminOrders() {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/orders/");
+      const res = await axios.get("https://nextcart-wxgk.onrender.com/orders/");
       setOrders(res.data);
     } catch (err) {
       console.log(err);
@@ -20,7 +20,7 @@ function AdminOrders() {
   // ✅ Update status
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/orders/${id}`, {
+      await axios.put(`https://nextcart-wxgk.onrender.com/orders/${id}`,{
         status: status,
       });
 
@@ -34,7 +34,7 @@ function AdminOrders() {
   // ✅ Delete order
   const deleteOrder = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/orders/${id}`);
+      await axios.delete(`https://nextcart-wxgk.onrender.com/orders/${id}`,);
       alert("Deleted 🗑️");
       fetchOrders();
     } catch (err) {

@@ -9,11 +9,11 @@ function AdminDashboard() {
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    try {
-      const [o, p] = await Promise.all([
-        axios.get("http://127.0.0.1:8000/orders/"),
-        axios.get("http://127.0.0.1:8000/products/"),
-      ]);
+  try {
+  const [o, p] = await Promise.all([
+    axios.get("https://nextcart-wxgk.onrender.com/orders/"),
+    axios.get("https://nextcart-wxgk.onrender.com/products/"),
+  ]);
 
       setOrders(o.data);
       setProducts(p.data);
